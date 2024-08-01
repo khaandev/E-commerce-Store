@@ -28,6 +28,10 @@ class Product extends Model
         'images' => 'array'
     ];
 
+    public function soldRecords()
+    {
+        return $this->hasMany(Sold_Product::class);
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -36,5 +40,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes');
     }
 }

@@ -11,6 +11,17 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function soldProducts()
+    {
+        return $this->hasMany(Sold_Product::class);
+    }
+
+
+    public function likedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'likes');
+    }
+
     public function products() {
 
         return $this->hasMany(Product::class);

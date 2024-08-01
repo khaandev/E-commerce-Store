@@ -3,9 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SoldProductController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -51,9 +53,6 @@ Route::middleware(['auth',AdminMiddleware::class])->group(function () {
     // product Status
     Route::post('/products/{product}/update-sold', [ProductController::class, 'updateSold'])->name('products.updateSold');
     Route::post('/products/{product}/update-available', [ProductController::class, 'updateAvailable'])->name('products.updateAvailable');
-
-
-   
     Route::get('/admin', [HomeController::class, 'index'])->name('admin.dashboard');
 
 });
@@ -61,7 +60,13 @@ Route::middleware(['auth',AdminMiddleware::class])->group(function () {
 Route::get('/shop',[PagesController::class, 'products'])->name('products.shop');
 Route::get('/product/${id}/show', [PagesController::class, 'productsShow'])->name('product.show');
 
+// like
 
+Route::post('/product/{product}/like', [LikeController::class, 'like'])->name('product.like');
+Route::delete('/product/{product}/unlike', [LikeController::class, 'unlike'])->name('product.unlike');
+
+// product sold 
+Route::post('/product/{product}/sell', [SoldProductController::class, 'sellProduct'])->name('product.sell');
 
 
 
