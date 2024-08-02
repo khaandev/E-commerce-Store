@@ -8,8 +8,11 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SoldProductController;
+use App\Http\Controllers\WalletController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,20 +25,16 @@ Route::get('/admin', function () {
 
 
 
-// Route::get('/categories', function () {
-//     return view('admin.categories.categories');
-// });
-
-// Route::get('/update/category', function () {
-//     return view('admin.categories.updateCategory');
-// });
 
 
  
 
 Route::get('/dashboard', function () {
 
-    return view('dashboard');
+    $user = Auth::user();
+    $likedProducts = $user->likedProducts;
+
+    return view('dashboard',compact('likedProducts'));
 
 })->middleware(['auth', 'verified',UserMiddleware::class])->name('dashboard');
 
@@ -68,6 +67,8 @@ Route::delete('/product/{product}/unlike', [LikeController::class, 'unlike'])->n
 // product sold 
 Route::post('/product/{product}/sell', [SoldProductController::class, 'sellProduct'])->name('product.sell');
 
+// wallet
+Route::resource('/wallets', WalletController::class);
 
 
 

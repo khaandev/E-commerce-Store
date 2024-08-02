@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\BelongsToProduct;
 use App\Traits\BelongsToUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sold_Product extends Model
+class Wallet extends Model
 {
-    use HasFactory,BelongsToUser,BelongsToProduct;
+    use HasFactory,BelongsToUser;
 
     protected $guarded = [];
 
-   
+
 }

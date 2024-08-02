@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                      <x-nav-link
+                       :href="route('wallets.index')" 
+                        :active="request()->routeIs('wallets.index') || request()->routeIs('wallets.create') || request()->routeIs('wallets.edit')">
+                        {{ __('Wallet') }}
+                     
+                    </x-nav-link>
+
                 </div>
             </div>
 

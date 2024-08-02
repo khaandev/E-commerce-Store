@@ -11,6 +11,12 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
     public function soldProducts()
     {
         return $this->hasMany(Sold_Product::class);
